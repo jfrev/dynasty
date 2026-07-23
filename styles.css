@@ -1,0 +1,678 @@
+/* ============================================================
+   THE DYNASTY DISPATCH — stylesheet
+   Newspaper-style shell for a CFB 27 online dynasty site.
+   Team pages inherit this and override the --team-* variables.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap');
+
+:root{
+  --paper:      #f3ede0;
+  --paper-2:    #eae2d0;
+  --ink:        #1c1a16;
+  --ink-soft:   #4a453c;
+  --rule:       #1c1a16;
+  --rule-soft:  #c9bfa5;
+  --accent:     #a3231f;   /* wire-service red, used sparingly */
+  --team-primary:   #1c1a16;
+  --team-secondary: #c9bfa5;
+  --font-display: 'Playfair Display', 'Times New Roman', serif;
+  --font-body:    'Source Serif 4', Georgia, serif;
+  --font-mono:    'Space Mono', monospace;
+}
+
+*{ box-sizing: border-box; }
+
+html{ scroll-behavior: smooth; }
+
+body{
+  margin:0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+a{ color: inherit; text-decoration: none; }
+a:hover{ text-decoration: underline; }
+
+img{ max-width:100%; display:block; }
+
+.wrap{
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+/* Faint newsprint texture */
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  pointer-events:none;
+  z-index:0;
+  background-image:
+    radial-gradient(rgba(0,0,0,0.025) 1px, transparent 1px);
+  background-size: 3px 3px;
+  opacity:.6;
+}
+
+/* ---------- Top utility bar ---------- */
+.topbar{
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.topbar .wrap{
+  display:flex; justify-content: space-between; align-items:center;
+  padding-top:7px; padding-bottom:7px;
+}
+.topbar span{ opacity:.85; }
+
+/* ---------- Masthead ---------- */
+.masthead{
+  border-bottom: 5px double var(--rule);
+  padding: 26px 0 14px;
+  text-align:center;
+  position:relative;
+  z-index:1;
+}
+.masthead .kicker{
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color: var(--ink-soft);
+  margin-bottom:6px;
+}
+.masthead h1{
+  font-family: var(--font-display);
+  font-weight:900;
+  font-size: clamp(38px, 7vw, 74px);
+  margin: 4px 0 8px;
+  letter-spacing: -0.5px;
+}
+.masthead .tagline{
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size:14.5px;
+}
+.masthead .dateline{
+  margin-top:12px;
+  display:flex; justify-content:center; gap:18px;
+  font-family: var(--font-mono);
+  font-size:11.5px;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  border-top:1px solid var(--rule-soft);
+  border-bottom:1px solid var(--rule-soft);
+  padding: 7px 0;
+}
+
+/* ---------- Nav ---------- */
+nav.mainnav{
+  background: var(--paper-2);
+  border-bottom: 2px solid var(--rule);
+  position: sticky; top:0; z-index: 50;
+}
+nav.mainnav ul{
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  gap: 2px;
+  margin:0; padding:0;
+  justify-content:center;
+}
+nav.mainnav a{
+  display:block;
+  padding: 11px 16px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  border-right: 1px solid var(--rule-soft);
+  white-space:nowrap;
+}
+nav.mainnav li:last-child a{ border-right:none; }
+nav.mainnav a:hover, nav.mainnav a.active{
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration:none;
+}
+
+/* ---------- Section labels ---------- */
+.section-label{
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  border-bottom: 2px solid var(--rule);
+  padding-bottom: 6px;
+  margin: 34px 0 16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+}
+.section-label span.note{
+  font-style: italic;
+  text-transform:none;
+  letter-spacing:0;
+  color: var(--ink-soft);
+  font-family: var(--font-body);
+}
+
+/* ---------- Front page grid ---------- */
+.front-grid{
+  display:grid;
+  grid-template-columns: 2.1fr 1fr;
+  gap: 34px;
+  align-items:start;
+  margin-top: 24px;
+  position:relative; z-index:1;
+}
+
+.lead-story .eyebrow{
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.lead-story h2{
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4vw, 46px);
+  line-height:1.05;
+  margin: 0 0 10px;
+}
+.lead-story .dek{
+  font-style: italic;
+  font-size: 19px;
+  color: var(--ink-soft);
+  margin-bottom: 14px;
+  border-left: 3px solid var(--rule);
+  padding-left: 14px;
+}
+.byline{
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing:.05em;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+}
+.story-body{ columns: 1; }
+.story-body p{ margin: 0 0 14px; }
+.story-body p:first-of-type::first-letter{
+  font-family: var(--font-display);
+  font-size: 58px;
+  float:left;
+  line-height:.8;
+  padding: 4px 8px 0 0;
+  font-weight:700;
+}
+
+.secondary-stories{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 8px;
+  border-top: 3px solid var(--rule);
+  padding-top: 20px;
+}
+.secondary-stories article h3{
+  font-family: var(--font-display);
+  font-size: 21px;
+  line-height:1.15;
+  margin: 6px 0 8px;
+}
+.secondary-stories article .eyebrow{
+  font-family: var(--font-mono);
+  font-size:10.5px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color: var(--accent);
+}
+.secondary-stories article p{
+  font-size:15px;
+  color: var(--ink-soft);
+  margin:0 0 8px;
+}
+
+/* ---------- Sidebar / social buzz ---------- */
+.sidebar{
+  border-left: 2px solid var(--rule);
+  padding-left: 24px;
+}
+.sidebar h3{
+  font-family: var(--font-mono);
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  margin: 0 0 14px;
+  padding-bottom:8px;
+  border-bottom:2px solid var(--rule);
+}
+.tweet{
+  background: #fff;
+  border: 1px solid var(--rule-soft);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  box-shadow: 2px 2px 0 rgba(28,26,22,.05);
+}
+.tweet .who{
+  display:flex; align-items:center; gap:8px;
+  margin-bottom:6px;
+}
+.tweet .avatar{
+  width:34px; height:34px; border-radius:50%;
+  background: var(--ink);
+  color: var(--paper);
+  display:flex; align-items:center; justify-content:center;
+  font-family: var(--font-mono);
+  font-weight:700; font-size:13px;
+  flex-shrink:0;
+}
+.tweet .name{ font-weight:700; font-size:14px; }
+.tweet .handle{ font-family: var(--font-mono); font-size:11.5px; color: var(--ink-soft); }
+.tweet .body{ font-size:14.5px; line-height:1.4; }
+.tweet .meta{
+  font-family: var(--font-mono);
+  font-size:10.5px;
+  color: var(--ink-soft);
+  margin-top:8px;
+  opacity:.8;
+}
+
+.standings-teaser{ margin-top: 26px; }
+.standings-teaser table{ width:100%; border-collapse:collapse; font-size:13.5px; }
+.standings-teaser th, .standings-teaser td{
+  padding:6px 4px; border-bottom:1px solid var(--rule-soft); text-align:left;
+}
+.standings-teaser th{ font-family: var(--font-mono); font-size:10.5px; text-transform:uppercase; }
+
+/* ---------- Footer ---------- */
+footer{
+  border-top: 5px double var(--rule);
+  margin-top: 50px;
+  padding: 20px 0 40px;
+  text-align:center;
+  font-family: var(--font-mono);
+  font-size:11px;
+  color: var(--ink-soft);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  position:relative; z-index:1;
+}
+
+/* ============================================================
+   TEAM PAGE
+   ============================================================ */
+.team-hero{
+  background: linear-gradient(180deg, var(--team-primary) 0%, var(--team-primary) 100%);
+  color: var(--team-on-primary, #fff);
+  padding: 40px 0 30px;
+  position:relative;
+  border-bottom: 6px solid var(--team-secondary);
+}
+.team-hero .wrap{
+  display:flex; align-items:center; gap:26px; flex-wrap:wrap;
+}
+.team-crest{
+  width:96px; height:96px;
+  border-radius:50%;
+  background: var(--team-secondary);
+  color: var(--team-primary);
+  display:flex; align-items:center; justify-content:center;
+  font-family: var(--font-display);
+  font-weight:900;
+  font-size:30px;
+  flex-shrink:0;
+  border: 3px solid rgba(255,255,255,.5);
+}
+.team-hero .team-meta .conf{
+  font-family: var(--font-mono);
+  font-size:11.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  opacity:.85;
+}
+.team-hero h1{
+  font-family: var(--font-display);
+  font-weight:900;
+  font-size: clamp(32px,5vw,54px);
+  margin:4px 0;
+}
+.team-hero .beat{
+  font-style:italic;
+  opacity:.9;
+  font-size:14.5px;
+}
+.placeholder-note{
+  display:inline-block;
+  margin-top:10px;
+  background: rgba(255,255,255,.15);
+  border:1px dashed rgba(255,255,255,.5);
+  padding:5px 10px;
+  font-family: var(--font-mono);
+  font-size:10.5px;
+  border-radius:5px;
+}
+
+.rank-badge{
+  display:inline-block;
+  font-family: var(--font-mono);
+  font-weight:700;
+  font-size:13px;
+  letter-spacing:.05em;
+  background: rgba(255,255,255,.18);
+  border: 1px solid rgba(255,255,255,.5);
+  padding: 2px 9px;
+  border-radius: 4px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.betting-box{
+  background: #fff;
+  border: 2px solid var(--rule);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin: 18px 0 22px;
+  font-family: var(--font-mono);
+}
+.betting-box .bb-title{
+  font-size:11px; text-transform:uppercase; letter-spacing:.1em;
+  border-bottom:1px solid var(--rule-soft); padding-bottom:8px; margin-bottom:10px;
+  display:flex; justify-content:space-between;
+}
+.betting-box .bb-row{
+  display:flex; justify-content:space-between;
+  font-size: 13.5px;
+  padding: 4px 0;
+}
+.betting-box .bb-row .val{ font-weight:700; }
+.betting-box .bb-note{
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 13.5px;
+  margin-top: 10px;
+  color: var(--ink-soft);
+  border-top: 1px dashed var(--rule-soft);
+  padding-top: 8px;
+}
+
+.team-body{
+  display:grid;
+  grid-template-columns: 2.1fr 1fr;
+  gap: 34px;
+  padding: 30px 0 10px;
+  position:relative; z-index:1;
+}
+
+.record-card{
+  background:#fff;
+  border:1px solid var(--rule-soft);
+  border-radius:10px;
+  padding:18px 20px;
+  margin-bottom:22px;
+}
+.record-card h3{
+  font-family: var(--font-mono);
+  font-size:12px; text-transform:uppercase; letter-spacing:.1em;
+  margin:0 0 12px;
+  border-bottom:2px solid var(--rule);
+  padding-bottom:8px;
+}
+.record-grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:10px 18px;
+  font-size:14.5px;
+}
+.record-grid .num{
+  font-family: var(--font-display);
+  font-weight:700;
+  font-size:26px;
+  display:block;
+}
+.record-grid .lbl{
+  font-family: var(--font-mono);
+  font-size:10.5px;
+  text-transform:uppercase;
+  color: var(--ink-soft);
+  letter-spacing:.05em;
+}
+
+.week-entry{
+  border-bottom: 1px solid var(--rule-soft);
+  padding: 22px 0;
+}
+.week-entry:first-of-type{ padding-top:0; }
+.week-entry .weektag{
+  display:inline-block;
+  background: var(--team-primary);
+  color: var(--team-on-primary,#fff);
+  font-family: var(--font-mono);
+  font-size:10.5px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  padding:3px 9px;
+  border-radius: 4px;
+  margin-bottom:10px;
+}
+.week-entry h3{
+  font-family: var(--font-display);
+  font-size:24px;
+  margin: 6px 0 4px;
+}
+.week-entry .dek{
+  font-style:italic;
+  color: var(--ink-soft);
+  margin-bottom:10px;
+}
+
+.empty-note{
+  font-style:italic;
+  color: var(--ink-soft);
+  padding: 30px 0;
+  border-top: 1px dashed var(--rule-soft);
+  border-bottom: 1px dashed var(--rule-soft);
+  text-align:center;
+}
+
+/* ---------- Coach card ---------- */
+.coach-card{
+  background:#fff;
+  border:1px solid var(--rule-soft);
+  border-radius:10px;
+  padding:18px 20px;
+  margin-bottom:22px;
+}
+.coach-card h3{
+  font-family: var(--font-mono);
+  font-size:12px; text-transform:uppercase; letter-spacing:.1em;
+  margin:0 0 12px;
+  border-bottom:2px solid var(--rule);
+  padding-bottom:8px;
+}
+.coach-card .coach-name{
+  font-family: var(--font-display);
+  font-weight:700;
+  font-size:21px;
+  margin-bottom:2px;
+}
+.coach-card .coach-record-line{
+  font-family: var(--font-mono);
+  font-size:11.5px;
+  color: var(--ink-soft);
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  margin-bottom:10px;
+}
+.coach-card p{ font-size:14.5px; margin:0; }
+
+/* ---------- Recruiting table ---------- */
+.recruit-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:14.5px;
+  background:#fff;
+  border:1px solid var(--rule-soft);
+  border-radius:8px;
+  overflow:hidden;
+}
+.recruit-table th{
+  font-family: var(--font-mono);
+  font-size:10.5px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  text-align:left;
+  padding:9px 12px;
+  background: var(--team-primary);
+  color: var(--team-on-primary, #fff);
+}
+.recruit-table td{
+  padding:9px 12px;
+  border-bottom:1px solid var(--rule-soft);
+}
+.recruit-table tr:last-child td{ border-bottom:none; }
+.recruit-table .stars{
+  color: var(--accent);
+  letter-spacing:1px;
+  white-space:nowrap;
+}
+
+/* ---------- Recruiting tabs ---------- */
+.tab-bar{
+  display:flex;
+  gap:2px;
+  margin-bottom:0;
+}
+.tab-btn{
+  font-family: var(--font-mono);
+  font-size:11.5px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  padding:9px 16px;
+  background: var(--paper-2);
+  border: 1px solid var(--rule-soft);
+  border-bottom:none;
+  cursor:pointer;
+  color: var(--ink-soft);
+}
+.tab-btn.active{
+  background:#fff;
+  color: var(--ink);
+  font-weight:700;
+  border-bottom: 1px solid #fff;
+  margin-bottom:-1px;
+  position:relative;
+  z-index:2;
+}
+.tab-panel{ display:none; }
+.tab-panel.active{ display:block; }
+.recruit-empty{
+  background:#fff;
+  border:1px solid var(--rule-soft);
+  border-top:none;
+  padding: 22px 16px;
+  text-align:center;
+  font-style:italic;
+  color: var(--ink-soft);
+  font-size:14.5px;
+}
+
+/* ---------- Back issues link ---------- */
+.back-issues-link{
+  display:block;
+  text-align:center;
+  padding: 14px;
+  margin: 18px 0 8px;
+  border: 1px dashed var(--rule-soft);
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size:12.5px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  background: var(--paper-2);
+}
+
+/* ---------- Futures box ---------- */
+.futures-card .fut-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  font-size:14px;
+}
+.futures-card .fut-row:last-child{ border-bottom:none; }
+.futures-card .fut-label{ color: var(--ink-soft); }
+.futures-card .fut-odds{
+  font-family: var(--font-mono);
+  font-weight:700;
+}
+
+/* ---------- Records / standings page ---------- */
+.standings-table-wrap{ margin: 20px 0 40px; overflow-x:auto; }
+table.standings{
+  width:100%;
+  border-collapse: collapse;
+  font-size:15px;
+  background:#fff;
+}
+table.standings th{
+  font-family: var(--font-mono);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  text-align:left;
+  padding:10px 12px;
+  background: var(--ink);
+  color: var(--paper);
+}
+table.standings td{
+  padding:11px 12px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+table.standings tr:nth-child(even) td{ background: rgba(0,0,0,.02); }
+table.standings .teamcell{
+  display:flex; align-items:center; gap:10px;
+  font-weight:600;
+}
+table.standings .dot{
+  width:14px; height:14px; border-radius:50%;
+  flex-shrink:0;
+  display:inline-block;
+}
+table.standings .rankcell{
+  font-family: var(--font-mono);
+  font-size:12.5px;
+  color: var(--accent);
+  font-weight:700;
+}
+
+.legend-note{
+  font-family: var(--font-mono);
+  font-size:11.5px;
+  color: var(--ink-soft);
+  margin-top: -20px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 880px){
+  .front-grid, .team-body{ grid-template-columns: 1fr; }
+  .sidebar{ border-left:none; border-top:2px solid var(--rule); padding-left:0; padding-top:20px; }
+  .secondary-stories{ grid-template-columns: 1fr; }
+  nav.mainnav a{ padding:10px 11px; font-size:11px; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+}
